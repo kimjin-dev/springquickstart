@@ -1,9 +1,6 @@
 package polymorphism;
 
 public class SamsungTV implements TV {
-	
-	private SonySpeaker speacker;
-	
 	public void initMethod() {
 		System.out.println("==> 객체 초기화 작업 처리");
 	}
@@ -11,11 +8,7 @@ public class SamsungTV implements TV {
 		System.out.println("==>객체 삭제 전에 처리할 로직 처리...");
 	}
 	public SamsungTV() {
-		System.out.println("====> SamsungTV(1) 객체를 생성");
-	}
-	public SamsungTV(SonySpeaker speacker) {
-		System.out.println("====> SamsungTV(2) 객체를 생성");
-		this.speacker = speacker;
+		System.out.println("====> SamsungTV 객체를 생성");
 	}
 	public void powerOn() {
 		System.out.println("SamsungTV---전원 켠다.");
@@ -26,12 +19,10 @@ public class SamsungTV implements TV {
 	}
 
 	public void volumeUp() {
-		speacker = new SonySpeaker();
-		speacker.volumeUp();
+		System.out.println("SamsungTV---소리 올린다.");
 	}
 
 	public void volumeDown() {
-		speacker = new SonySpeaker();
-		speacker.volumeDown();
+		System.out.println("SamsungTV---소리 내린다.");
 	}
 }
