@@ -1,6 +1,6 @@
 package polymorphism;
 
-public interface Speacker {
+public interface Speaker {
 
 	void volumeUp();
 

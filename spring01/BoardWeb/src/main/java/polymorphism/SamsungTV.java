@@ -2,7 +2,7 @@ package polymorphism;
 
 public class SamsungTV implements TV {
 	
-	private Speacker speacker;
+	private Speaker speaker;
 	private int price;
 	
 	public void initMethod() {
@@ -14,13 +14,10 @@ public class SamsungTV implements TV {
 	public SamsungTV() {
 		System.out.println("====> SamsungTV(1) 按眉甫 积己");
 	}
-	public SamsungTV(Speacker speacker) {
-		System.out.println("====> SamsungTV(2) 按眉甫 积己");
-		this.speacker = speacker;
+	public void setSpeaker(Speaker speaker) {
+		this.speaker = speaker;
 	}
-	public SamsungTV(Speacker speacker, int price) {
-		System.out.println("====> SamsungTV(3) 按眉甫 积己");
-		this.speacker = speacker;
+	public void setPrice(int price) {
 		this.price = price;
 	}
 	public void powerOn() {
@@ -32,10 +29,10 @@ public class SamsungTV implements TV {
 	}
 
 	public void volumeUp() {
-		speacker.volumeUp();
+		speaker.volumeUp();
 	}
 
 	public void volumeDown() {
-		speacker.volumeDown();
+		speaker.volumeDown();
 	}
 }
