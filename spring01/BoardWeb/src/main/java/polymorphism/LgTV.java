@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 @Component("tv")
 public class LgTV implements TV{
-	@Resource(name="sony")
+	@Autowired
 	private Speaker speacker;
 	
 	public LgTV() {
