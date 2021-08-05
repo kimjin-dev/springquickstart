@@ -1,0 +1,12 @@
+/.metadata/
+/RemoteSystemsTempFiles/
+/Servers/
+.settings/
+build/
+.classpath
+.project
+.jar
+.war
+*.json
+/.recommenders/
+target/
