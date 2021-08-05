@@ -20,6 +20,14 @@
 			<artifactId>h2</artifactId>
 			<version>1.4.199</version>
 		</dependency>
+		<!-- others -->
+		<dependency>
+		    <groupId>cglib</groupId>
+		    <artifactId>cglib</artifactId>
+		    <version>2.2</version>
+		    <type>jar</type>
+		    <scope>compile</scope>
+		</dependency>
 		<!-- Spring -->
 		<dependency>
 			<groupId>org.springframework</groupId>
