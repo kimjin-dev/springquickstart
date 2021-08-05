@@ -10,7 +10,7 @@ import com.springbook.biz.common.JDBCUtil;
 import com.springbook.biz.user.UserVO;
 
 // DAO(Data Access Object)
-@Repository("userDAO")
+@Repository("userDAO") 
 public class UserDAO {
 	// JDBC 관련 변수
 	private Connection conn = null;
