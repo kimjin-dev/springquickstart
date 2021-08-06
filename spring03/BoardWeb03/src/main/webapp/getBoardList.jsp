@@ -55,7 +55,7 @@
 			%>
 			<tr>
 				<td><%=board.getSeq()%></td>
-				<td align="left"><a href="getBoard.jsp?seq=<%=board.getSeq()%>">
+				<td align="left"><a href="getBoard.do?seq=<%=board.getSeq()%>">
 						<%=board.getTitle()%></a></td>
 				<td><%=board.getWriter()%></td>
 				<td><%=board.getRegDate()%></td>
