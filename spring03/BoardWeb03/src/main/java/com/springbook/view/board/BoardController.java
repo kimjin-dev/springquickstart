@@ -3,68 +3,68 @@ package com.springbook.view.board;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.springbook.biz.board.BoardService;
 import com.springbook.biz.board.BoardVO;
-import com.springbook.biz.board.impl.BoardDAO;
 
 @Controller
 @SessionAttributes("board")
 public class BoardController {
 	
-	// ê²€ìƒ‰ ì¡°ê±´ ëª©ë¡ ì„¤ì •
+	@Autowired
+	private BoardService boardService;
+	
+	// ±Û µî·Ï
+	@RequestMapping(value = "/insertBoard.do")
+	public String insertBoard(BoardVO vo) {
+		boardService.insertBoard(vo);
+		return "getBoardList.do";
+	}
+
+	// ±Û ¼öÁ¤
+	@RequestMapping("/updateBoard.do")
+	public String updateBoard(@ModelAttribute("board") BoardVO vo) {			
+		boardService.updateBoard(vo);
+		return "getBoardList.do";
+	}
+
+	// ±Û »èÁ¦
+	@RequestMapping("/deleteBoard.do")
+	public String deleteBoard(BoardVO vo) {
+		boardService.deleteBoard(vo);
+		return "getBoardList.do";
+	}
+
+	// ±Û »ó¼¼ Á¶È¸
+	@RequestMapping("/getBoard.do")
+	public String getBoard(BoardVO vo, Model model) {
+		model.addAttribute("board", boardService.getBoard(vo)); // Model Á¤º¸ ÀúÀå
+		return "getBoard.jsp"; // View ÀÌ¸§ ¸®ÅÏ
+	}
+	
+	// °Ë»ö Á¶°Ç ¸ñ·Ï ¼³Á¤
 	@ModelAttribute("conditionMap")
 	public Map<String, String> searchConditionMap(){
 		Map<String, String> conditionMap = new HashMap<String, String>();
-		conditionMap.put("ì œëª©", "TITLE");
-		conditionMap.put("ë‚´ìš©", "CONTENT");
+		conditionMap.put("Á¦¸ñ", "TITLE");
+		conditionMap.put("³»¿ë", "CONTENT");
 		return conditionMap;
 	}
-	
-	// ê¸€ ë“±ë¡
-	@RequestMapping(value = "/insertBoard.do")
-	public String insertBoard(BoardVO vo, BoardDAO boardDAO) {
-		boardDAO.insertBoard(vo);
-		return "getBoardList.do";
-	}
 
-	// ê¸€ ìˆ˜ì •
-	@RequestMapping("/updateBoard.do")
-	public String updateBoard(@ModelAttribute("board") BoardVO vo, BoardDAO boardDAO) {
-		System.out.println("ë²ˆí˜¸ : " + vo.getSeq());
-		System.out.println("ì œëª© : " + vo.getTitle());
-		System.out.println("ì‘ì„±ì : " + vo.getWriter());
-		System.out.println("ë‚´ìš© : " + vo.getContent());
-		System.out.println("ë“±ë¡ì¼ : " + vo.getRegDate());
-		System.out.println("ì¡°íšŒìˆ˜ : " + vo.getCnt());
-		
-		boardDAO.updateBoard(vo);
-		return "getBoardList.do";
-	}
-
-	// ê¸€ ì‚­ì œ
-	@RequestMapping("/deleteBoard.do")
-	public String deleteBoard(BoardVO vo, BoardDAO boardDAO) {
-		boardDAO.deleteBoard(vo);
-		return "getBoardList.do";
-	}
-
-	// ê¸€ ìƒì„¸ ì¡°íšŒ
-	@RequestMapping("/getBoard.do")
-	public String getBoard(BoardVO vo, BoardDAO boardDAO, Model model) {
-		model.addAttribute("board", boardDAO.getBoard(vo)); // Model ì •ë³´ ì €ì¥
-		return "getBoard.jsp"; // View ì´ë¦„ ë¦¬í„´
-	}
-
-	// ê¸€ ëª©ë¡ ê²€ìƒ‰
+	// ±Û ¸ñ·Ï °Ë»ö
 	@RequestMapping("/getBoardList.do")
-	public String getBoardList(BoardVO vo, BoardDAO boardDAO, Model model) {		
-		// Model ì •ë³´ ì €ì¥
-		model.addAttribute("boardList", boardDAO.getBoardList(vo));																
-		return "getBoardList.jsp"; // View ì´ë¦„ ë¦¬í„´
+	public String getBoardList(BoardVO vo, Model model) {
+		// Null Check
+		if(vo.getSearchCondition() == null) vo.setSearchCondition("TITLE");
+		if(vo.getSearchKeyword() == null) vo.setSearchKeyword("");
+		// Model Á¤º¸ ÀúÀå
+		model.addAttribute("boardList", boardService.getBoardList(vo));																
+		return "getBoardList.jsp"; // View ÀÌ¸§ ¸®ÅÏ
 	}
 }
